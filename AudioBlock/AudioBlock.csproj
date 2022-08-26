@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{2837EBA5-2F9A-4192-A2E7-95D41F6C478F}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>WDE.AudioBlock</RootNamespace>
+    <AssemblyName>AudioBlock.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\ot\AppData\Roaming\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunSourceAnalysis>False</RunSourceAnalysis>
+    <StartArguments>/nocr</StartArguments>
+    <StartWorkingDirectory>c:\buzz</StartWorkingDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <StartAction>Program</StartAction>
+    <StartProgram>C:\Program Files (x86)\Jeskola\Buzz\buzz.exe</StartProgram>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\</OutputPath>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <Optimize>false</Optimize>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DefineConstants />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BuzzGUI">
+      <HintPath>..\Buzz\BuzzGUI.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BuzzGUI.Common">
+      <HintPath>..\Buzz\BuzzGUI.Common.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BuzzGUI.FileBrowser">
+      <HintPath>..\Buzz\BuzzGUI.FileBrowser.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BuzzGUI.Interfaces">
+      <HintPath>..\Buzz\BuzzGUI.Interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ModernSequenceEditor.Interfaces">
+      <HintPath>..\Buzz\ModernSequenceEditor.Interfaces.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Spectrogram">
+      <HintPath>..\Spectrogram\Spectrogram.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AboutWindow.cs" />
+    <Compile Include="AudioBlockSettings.cs" />
+    <Compile Include="BpmDialog.cs" />
+    <Compile Include="Effects.cs" />
+    <Compile Include="Envelopes\EnvelopeBase.cs" />
+    <Compile Include="InputDialogSpectrogram.cs" />
+    <Compile Include="InputDialogNumber.cs" />
+    <Compile Include="r8brain\R8brain.cs" />
+    <Compile Include="r8brain\R8brainInterop64.cs" />
+    <Compile Include="r8brain\R8brainInterop32.cs" />
+    <Compile Include="RealTimeResampler.cs" />
+    <Compile Include="SoundTouch\SoundTouch.cs" />
+    <Compile Include="SoundTouch\SoundTouchInterop32.cs" />
+    <Compile Include="SoundTouch\SoundTouchInterop64.cs" />
+    <Compile Include="SoundTouch\SoundTouchSettings.cs" />
+    <Compile Include="Spline\ArrayUtil.cs" />
+    <Compile Include="AudioBlock.cs" />
+    <Compile Include="AudioBlockUIItem.cs" />
+    <Compile Include="Spline\CubicSpline.cs" />
+    <Compile Include="Envelopes\EnvelopeBox.cs" />
+    <Compile Include="Envelopes\EnvelopeLayerPan.cs" />
+    <Compile Include="Envelopes\EnvelopeLayerVolume.cs" />
+    <Compile Include="Envelopes\Envelopes.cs" />
+    <Compile Include="Envelopes\IEnvelopeLayer.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SplineCache.cs" />
+    <Compile Include="TimeLineCanvas.cs" />
+    <Compile Include="Spline\TriDiagonalMatrix.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="WaveCanvas.xaml.cs">
+      <DependentUpon>WaveCanvas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WaveUndo.cs" />
+    <Compile Include="WaveView.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WaveCanvas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Topaznew.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\pointer.cur" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\busy.cur" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+  <PropertyGroup>
+    <PostBuildEvent>REM copy "$(SolutionDir)\LibSoundTouch\*.*" "C:\Program Files (x86)\Jeskola\Buzz\"
+REM copy "$(SolutionDir)\Spectrogram\*.*" "C:\Program Files (x86)\Jeskola\Buzz\"
+REM copy "$(SolutionDir)\r8brain\*.*" "C:\Program Files (x86)\Jeskola\Buzz\"
+powershell -Command "Start-Process cmd -ArgumentList('/C', 'COPY /Y \"$(SolutionDir)AudioBlock\bin\*\" \"C:\Program Files (x86)\Jeskola\Buzz\Gear\Generators\"')"  -Verb RunAs
+powershell -Command "Start-Process cmd -ArgumentList('/C', 'COPY /Y \"$(SolutionDir)AudioBlock\bin\*\" \"C:\Program Files\Jeskola\Buzz\Gear\Generators\"')"  -Verb RunAs</PostBuildEvent>
+  </PropertyGroup>
+</Project>
