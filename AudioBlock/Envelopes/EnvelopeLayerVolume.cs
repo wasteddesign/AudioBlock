@@ -615,6 +615,7 @@ namespace WDE.AudioBlock
         }
 
         MenuItem miVolume;
+        MenuItem miCurves;
         MenuItem menuItemVolumeLayerVisible;
         MenuItem miVolume0dB;
         MenuItem miVolume6dB;
@@ -689,13 +690,13 @@ namespace WDE.AudioBlock
                     miVolume6dB.Unchecked += MiVolume6dB_Unchecked;
                     miVolume6dB.Header = string.Format("Max {0:0.0} bB", Decibel.FromAmplitude(2.0));
                     miMode.Items.Add(miVolume6dB);
-                    mi = new MenuItem();
-                    mi.Header = "Curves";
-                    mi.IsCheckable = true;
-                    mi.IsChecked = audioBlock.MachineState.AudioBlockInfoTable[audioBlockIndex].VolumeEnvelopeCurves;
-                    mi.Checked += Mi_Checked_Curves;
-                    mi.Unchecked += Mi_Unchecked_Curves;
-                    miVolume.Items.Add(mi);
+                    miCurves = new MenuItem();
+                    miCurves.Header = "Curves";
+                    miCurves.IsCheckable = true;
+                    miCurves.IsChecked = audioBlock.MachineState.AudioBlockInfoTable[audioBlockIndex].VolumeEnvelopeCurves;
+                    miCurves.Checked += Mi_Checked_Curves;
+                    miCurves.Unchecked += Mi_Unchecked_Curves;
+                    miVolume.Items.Add(miCurves);
 
                     foreach (Control item in miVolume.Items)
                         if (item != menuItemVolumeLayerVisible && item != miEnabled)
@@ -704,6 +705,35 @@ namespace WDE.AudioBlock
             };
 
             return miVolume;
+        }
+
+        public void RemoveMenuCheckedEvents()
+        {
+            if (miEnabled != null)
+            {
+                miEnabled.Checked -= MiEnabled_Checked;
+                miEnabled.Unchecked -= MiEnabled_Unchecked;
+            }
+            if (menuItemVolumeLayerVisible != null)
+            {
+                menuItemVolumeLayerVisible.Checked -= MenuItemVolumeLayerVisible_Checked;
+                menuItemVolumeLayerVisible.Unchecked -= MenuItemVolumeLayerVisible_Unchecked;
+            }
+            if (miVolume0dB != null)
+            {
+                miVolume0dB.Checked -= Mi_Checked_0dB;
+                miVolume0dB.Unchecked -= MiVolume0dB_Unchecked;
+            }
+            if (miVolume6dB != null)
+            {
+                miVolume6dB.Checked -= Mi_Checked_6dB;
+                miVolume6dB.Unchecked -= MiVolume6dB_Unchecked;
+            }
+            if (miCurves != null)
+            {
+                miCurves.Checked -= Mi_Checked_Curves;
+                miCurves.Unchecked -= Mi_Unchecked_Curves;
+            }
         }
 
         private void Mi_Unchecked_Curves(object sender, RoutedEventArgs e)

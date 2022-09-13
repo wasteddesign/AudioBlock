@@ -585,6 +585,7 @@ namespace WDE.AudioBlock
         MenuItem miPan;
         MenuItem menuItemPanLayerVisible;
         MenuItem miEnabled;
+        MenuItem miCurves;
 
         public int AudioBlockIndex { get => audioBlockIndex; set => audioBlockIndex = value; }
 
@@ -634,13 +635,13 @@ namespace WDE.AudioBlock
                     mi.Header = "Reset";
                     mi.Click += Mi_Click_Reset;
                     miPan.Items.Add(mi);
-                    mi = new MenuItem();
-                    mi.Header = "Curves";
-                    mi.IsCheckable = true;
-                    mi.IsChecked = audioBlock.MachineState.AudioBlockInfoTable[audioBlockIndex].PanEnvelopeCurves;
-                    mi.Checked += Mi_Checked_Curves;
-                    mi.Unchecked += Mi_Unchecked_Curves;
-                    miPan.Items.Add(mi);
+                    miCurves = new MenuItem();
+                    miCurves.Header = "Curves";
+                    miCurves.IsCheckable = true;
+                    miCurves.IsChecked = audioBlock.MachineState.AudioBlockInfoTable[audioBlockIndex].PanEnvelopeCurves;
+                    miCurves.Checked += Mi_Checked_Curves;
+                    miCurves.Unchecked += Mi_Unchecked_Curves;
+                    miPan.Items.Add(miCurves);
 
                     foreach (Control item in miPan.Items)
                         if (item != menuItemPanLayerVisible && item != miEnabled)
@@ -650,6 +651,25 @@ namespace WDE.AudioBlock
             };
 
             return miPan;
+        }
+
+        public void RemoveMenuCheckedEvents()
+        {
+            if (miEnabled != null)
+            {
+                miEnabled.Checked -= MiEnabled_Checked;
+                miEnabled.Unchecked -= MiEnabled_Unchecked;
+            }
+            if (menuItemPanLayerVisible != null)
+            {
+                menuItemPanLayerVisible.Checked -= MenuItemPanLayerVisible_Checked;
+                menuItemPanLayerVisible.Unchecked -= MenuItemPanLayerVisible_Unchecked;
+            }
+            if (miCurves != null)
+            {
+                miCurves.Checked -= Mi_Checked_Curves;
+                miCurves.Unchecked -= Mi_Unchecked_Curves;
+            }
         }
 
         private void Mi_Unchecked_Curves(object sender, RoutedEventArgs e)

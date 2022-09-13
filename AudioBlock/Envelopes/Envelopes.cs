@@ -27,21 +27,25 @@ namespace WDE.AudioBlock
             Canvas.SetTop(this, 0);
 
             HostCanvas = parentCanvas;
-            HostCanvas.SizeChanged += ParentCanvas_SizeChanged;
+            this.Loaded += (s, e) =>
+            {
+                HostCanvas.SizeChanged += ParentCanvas_SizeChanged;
+
+                layerVolume = new EnvelopeLayerVolume();
+                layerVolume.Init(audioBlock, audioBlockIndex, this);
+                layerVolume.LoadData();
+                this.Children.Add(layerVolume);
+
+                layerPan = new EnvelopeLayerPan();
+                layerPan.Init(audioBlock, audioBlockIndex, this);
+                layerPan.LoadData();
+                this.Children.Add(layerPan);
+
+                HostCanvas.ContextMenu.Items.Insert(0, layerVolume.CreateEnvelopeMenu());
+                HostCanvas.ContextMenu.Items.Insert(1, layerPan.CreateEnvelopeMenu());
+            };
+            
             this.Unloaded += Envelopes_Unloaded;
-
-            layerVolume = new EnvelopeLayerVolume();
-            layerVolume.Init(audioBlock, audioBlockIndex, this);
-            layerVolume.LoadData();
-            this.Children.Add(layerVolume);
-
-            layerPan = new EnvelopeLayerPan();
-            layerPan.Init(audioBlock, audioBlockIndex, this);
-            layerPan.LoadData();
-            this.Children.Add(layerPan);
-
-            HostCanvas.ContextMenu.Items.Insert(0, layerVolume.CreateEnvelopeMenu());
-            HostCanvas.ContextMenu.Items.Insert(1, layerPan.CreateEnvelopeMenu());
         }
 
         private void Envelopes_Unloaded(object sender, System.Windows.RoutedEventArgs e)
@@ -58,6 +62,8 @@ namespace WDE.AudioBlock
 
         internal void UpdateMenus()
         {
+            layerVolume.RemoveMenuCheckedEvents();
+            layerPan.RemoveMenuCheckedEvents();
             HostCanvas.ContextMenu.Items.RemoveAt(1);
             HostCanvas.ContextMenu.Items.RemoveAt(0);
             HostCanvas.ContextMenu.Items.Insert(0, layerVolume.CreateEnvelopeMenu());
