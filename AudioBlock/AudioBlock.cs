@@ -1,5 +1,6 @@
 ﻿using Buzz.MachineInterface;
 using BuzzGUI.Common;
+using BuzzGUI.Common.InterfaceExtensions;
 using BuzzGUI.Interfaces;
 using ModernSequenceEditor.Interfaces;
 using System;
@@ -18,7 +19,7 @@ namespace WDE.AudioBlock
     public class AudioBlock : IBuzzMachine, INotifyPropertyChanged, IModernSequencerMachineInterface
     {   
         // Some defines used by AudioBlock
-        private string AUDIO_BLOCK_VERSION = "1.2.5.12";
+        private string AUDIO_BLOCK_VERSION = "1.2.5.13";
 
         public const int NUMBER_OF_AUDIO_BLOCKS = 16;
         public const int CLICK_REMOVAL_SAMPLES = 200;
@@ -256,9 +257,10 @@ namespace WDE.AudioBlock
                 if (host.Machine.Patterns[0].Name == "00")
                 {
                     string name = AUDIO_BLOCK_PATTERN_BASE_NAME + "00";
-                    host.Machine.DeletePattern(host.Machine.Patterns[0]);
+                    var pat = host.Machine.Patterns.FirstOrDefault();
                     host.Machine.CreatePattern(name, 16);
                     MachineState.AudioBlockInfoTable[0].Pattern = name;
+                    host.Machine.DeletePattern(pat);
                 }
         }
 
@@ -1658,7 +1660,7 @@ namespace WDE.AudioBlock
         }
 
         /// <summary>
-        /// Returns playing position in pattern or -1.
+        /// Returns playing position in samples in pattern or -1.
         /// </summary>
         /// <param name="patternName"></param>
         /// <param name="seq"></param>
